@@ -15,11 +15,11 @@ import java.io.IOException;
 @WebServlet("/register")
 public class UserServlet extends HttpServlet {
 
-    @Override
+/*    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("userList", UserService.getInstance().getAllUsers());
         req.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-    }
+    }*/
 
     @Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,9 +1,11 @@
 package service;
 
 import DAO.UserDAO;
+import DAO.UserHibernateDAO;
 import DAO.UserJdbcDAO;
 import dataSet.UsersDataSet;
 import util.DbHelper;
+import util.DbHelperHybernate;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -24,9 +26,15 @@ public class UserService {
 
     private UserDAO userDAO = getUserDAO();
 
-    private static UserJdbcDAO getUserDAO() {
+/*    private static UserJdbcDAO getUserDAO() {
         return new UserJdbcDAO(DbHelper.getMysqlConnection());
+    }*/
+
+    private static UserHibernateDAO getUserDAO() {
+        return new UserHibernateDAO(DbHelperHybernate.getSessionFactory());
     }
+
+
 
 
 
