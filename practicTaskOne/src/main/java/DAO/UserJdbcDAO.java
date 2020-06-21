@@ -10,7 +10,9 @@ public class UserJdbcDAO implements UserDAO{
 
     private Connection connection;
 
-    public UserJdbcDAO(Connection connection) {this.connection = connection;}
+    public UserJdbcDAO(Connection connection) {
+        this.connection = connection;
+    }
 
     public void addClient(UsersDataSet user) throws SQLException {
         try(PreparedStatement prepStat = connection.prepareStatement("INSERT INTO userList (name, password, age) VALUES (?, ?, ?)")) {

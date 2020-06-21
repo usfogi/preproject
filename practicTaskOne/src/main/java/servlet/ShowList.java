@@ -1,6 +1,7 @@
 package servlet;
 
 import service.UserService;
+import service.UserServiceImpImplementation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +12,12 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/list")
 public class ShowList extends HttpServlet {
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("userList", UserService.getInstance().getAllUsers());
+        UserService userService = new UserServiceImpImplementation();
+        req.setAttribute("userList", userService.getAllUsers());
         req.getServletContext().getRequestDispatcher("/userList.jsp").forward(req, resp);
     }
 }
