@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -37,13 +36,6 @@ public class DbHelper {
             throw new IllegalStateException();
         }
     }
-
-
-
-
-
-
-
 
     private static SessionFactory sessionFactory;
 

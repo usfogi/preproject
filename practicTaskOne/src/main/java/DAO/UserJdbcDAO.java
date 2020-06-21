@@ -1,7 +1,6 @@
 package DAO;
 
 import dataSet.UsersDataSet;
-
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;

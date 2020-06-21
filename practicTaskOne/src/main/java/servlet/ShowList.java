@@ -13,7 +13,6 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/list")
 public class ShowList extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = new UserServiceImpImplementation();

@@ -1,23 +1,11 @@
 package DAO;
 
 import dataSet.UsersDataSet;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import java.sql.SQLException;
 import java.util.List;
 
 public class UserHibernateDAO implements UserDAO {
-
-/*
-    private static SessionFactory sessionFactory;
-
-    public UserHibernateDAO(Session sessionFactory) {
-        UserHibernateDAO.sessionFactory = sessionFactory;
-        sessionFactory.openSession();
-    }
-*/
 
     private Session session;
 
@@ -25,10 +13,8 @@ public class UserHibernateDAO implements UserDAO {
         this.session = session;
     }
 
-
     @Override
     public void addClient(UsersDataSet user) throws SQLException {
-//        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.save(user);
@@ -46,7 +32,6 @@ public class UserHibernateDAO implements UserDAO {
     @Override
     public List<UsersDataSet> getList() throws SQLException {
         List<UsersDataSet> users = null;
-//        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             users = session.createQuery("FROM UsersDataSet").list();
@@ -66,7 +51,6 @@ public class UserHibernateDAO implements UserDAO {
     @Override
     public UsersDataSet getUserById(Long id) throws SQLException {
         UsersDataSet user = null;
-//        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             user = (UsersDataSet) session.get(UsersDataSet.class, id);
@@ -85,7 +69,6 @@ public class UserHibernateDAO implements UserDAO {
 
     @Override
     public void updateUser(UsersDataSet user) throws SQLException {
-//        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.update(user);
@@ -103,7 +86,6 @@ public class UserHibernateDAO implements UserDAO {
 
     @Override
     public void deleteUser(UsersDataSet user) throws SQLException {
-//        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.delete(user);

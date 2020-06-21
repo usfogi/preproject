@@ -3,7 +3,6 @@ package servlet;
 import dataSet.UsersDataSet;
 import service.UserService;
 import service.UserServiceImpImplementation;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,14 +14,6 @@ import java.io.IOException;
 
 @WebServlet("/register")
 public class UserServlet extends HttpServlet {
-
-
-
-/*    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("userList", UserService.getInstance().getAllUsers());
-        req.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-    }*/
 
     @Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

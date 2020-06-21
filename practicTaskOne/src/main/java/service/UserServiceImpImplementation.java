@@ -1,7 +1,6 @@
 package service;
 
 import DAO.UserDAO;
-import DAO.UserHibernateDAO;
 import dataSet.UsersDataSet;
 
 import util.UserDAOFactory;
