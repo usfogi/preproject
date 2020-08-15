@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Users</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        #first {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Log out" /><br><br>
+    </form>
+    <div>
+        <div>
+            <h3>Link to <a href="/admin/add"> Add</a> some user.</h3> <br>
+        </div>
+        <table style="width:50%">
+            <tr>
+                <th colspan="5">Table of Users</th>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Pass</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            <th:block th:each="user : ${users}">
+                <tr>
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.roles[0].name}"></td>
+                    <td id="first">
+                        <a href="#" th:href="@{/admin/edit(id=${user.id})}">Edit</a> or
+                        <a href="#" th:href="@{/admin/delete(id=${user.id})}"> Delete</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</body>
+</html>

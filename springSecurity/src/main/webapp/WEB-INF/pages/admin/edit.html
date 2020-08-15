@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EditPage</title>
+</head>
+<body>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Log out" /><br><br>
+    </form>
+
+    <form action="#" th:action="@{/admin/edit}" th:object="${user}" method="POST">
+        <input type="hidden" th:field="*{id}" />
+        <input type="text" th:field="*{name}" autofocus="autofocus" /><br/>
+        <input type="text" th:field="*{password}" />
+
+        <select th:name="auth" size="1" >
+            <option th:value="*{roles[0].id}">ADMIN</option>
+            <option th:value="*{roles[0].id}">USER</option>
+        </select>
+
+        <button type="submit" class="btn btn-info col-2">Update User</button>
+    </form>
+</body>
+</html>
