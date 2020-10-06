@@ -6,7 +6,9 @@ import com.springboot.demo.model.User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,7 +27,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addUser(User user) {
+    public void addUser(User user, long[] roles) {
+        setRole(user, roles);
         userDao.addUser(user);
     }
 
@@ -37,7 +40,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void editUser(User user) {
+    public void editUser(User user, long[] roles) {
+        setRole(user, roles);
         userDao.editUser(user);
     }
 
@@ -49,7 +53,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Role getRole(Long id) {
-        return userDao.getRole(id);
+    public Role getRole(Long id) { return userDao.getRole(id); }
+
+    private void setRole(User user, long[] roles) {
+        Set<Role> userRoles = new HashSet<>();
+        for (long role: roles) {
+            userRoles.add(getRole(Long.valueOf(role)));
+        }
+        user.setRoles(userRoles);
     }
 }

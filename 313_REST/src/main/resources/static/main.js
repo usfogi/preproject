@@ -6,12 +6,14 @@ function addUser(){
     newRoles.forEach(function (item){
         roles+=item +',';
     })
+    var roleFromForm =  document.getElementById("newRoles");
+    roleValue = roleFromForm[roleFromForm.selectedIndex].value;
 
     var roles1=roles.substr(0,roles.length-1);
-        var jsonVar = {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            password: document.getElementById("exampleInputPassword1").value
+    var jsonVar = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("exampleInputPassword1").value,
     };
 
     const response = fetch('http://localhost:8080/admin/users'+roles1, {
@@ -20,7 +22,7 @@ function addUser(){
         headers: {
             'Content-Type': 'application/json'
         }
-    });
+    }).then(function () { document.location.reload() });
 
         document.getElementById('table-tab').click();
         $("#usersTable > tbody").empty();
@@ -39,23 +41,14 @@ function printUsers() {
                         stringRoles += item.role + ' ';
                     })
                     console.log(r.name);
-                    var html = '<tr id='+r.id+'>' +
-                        '<td>' + r.id + '</td>' +
-                        '<td>' + r.name + '</td>' +
-                        '<td>' + r.email + '</td>' +
-                        '<td>' + stringRoles + '</td>' +
-                        '<td>' +
-                        '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModalCenter" onclick="editUser(this)">' +
-                        'Edit' +
-                        '</button>' +
-                        '</td>' +
-                        '<td>' +
-                        '<button type="button"  class="btnDelete btn btn-danger" data-toggle="modal" data-target="#deleteModalCenter" onclick="deleteRow(this)">' +
-                        'Delete' +
-                        '</button>' +
-                        '</td>' +
-                        '</tr>';
-                    $('#usersTable').append(html);
+                    $('#usersTable').append(`<tr id='${r.id}'>
+                        <td>${r.id}</td>
+                        <td>${r.name}</td>
+                        <td>${r.email}</td>
+                        <td>${stringRoles}</td>
+                        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModalCenter" onclick="editUser(this)">Edit</button></td>
+                        <td><button type="button"  class="btnDelete btn btn-danger" data-toggle="modal" data-target="#deleteModalCenter" onclick="deleteRow(this)">Delete</button></td>
+                    </tr>`);
                 });
             });
         });
@@ -89,9 +82,7 @@ function deleteRow(o) {
 
 function deleteUser() {
     var url = 'http://localhost:8080/admin/users/'+ userId;
-    fetch(url, {
-        method: 'DELETE',
-    })
+    fetch(url, {method: 'DELETE',})
         .then(res => res.text()) // or res.json()
         .then(res => console.log(res))
     var table = document.getElementById("usersTable");
@@ -112,13 +103,12 @@ function getUser() {
                 roles.forEach(function (item,) {
                     stringRoles += item.role + ' ';
                 })
-                var html = '<tr>' +
-                    '<td>' + data.id + '</td>' +
-                    '<td>' + data.name + '</td>' +
-                    '<td>' + data.email + '</td>' +
-                    '<td>' + stringRoles + '</td>' +
-                    '</tr>';
-                $('#userInfo').append(html);
+                $('#userInfo').append(`<tr>
+                    <td>${data.id}</td>
+                    <td>${data.name}</td>
+                    <td>${data.email}</td>
+                    <td>${stringRoles}</td>
+                </tr>`);
             })
         })
 }
@@ -173,7 +163,7 @@ function updateUser() {
         headers: {
             'Content-Type': 'application/json'
         }
-    });
+    }).then(function () { document.location.reload() });
 
         $("#usersTable > tbody").empty();
         printUsers();

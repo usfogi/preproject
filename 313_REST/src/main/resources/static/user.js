@@ -10,13 +10,13 @@ function getUser() {
                 roles.forEach(function (item) {
                     stringRoles += item.role + ' ';
                 })
-                var html = '<tr>' +
-                    '<td>' + data.id + '</td>' +
-                    '<td>' + data.name + '</td>' +
-                    '<td>' + data.email + '</td>' +
-                    '<td>' + stringRoles + '</td>' +
-                    '</tr>';
-                $('#userInfo').append(html);
+
+                $('#userInfo').append(`<tr>
+                    <td>${data.id}</td>
+                    <td>${data.name}</td>
+                    <td>${data.email}</td>
+                    <td>${stringRoles}</td>
+                </tr>`);
             })
         })
 }

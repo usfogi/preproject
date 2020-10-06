@@ -4,8 +4,7 @@ import com.springboot.demo.model.User;
 import com.springboot.demo.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -16,27 +15,27 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String helloPage() {
         return "login";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping(value = "/")
     public String loginPage() {
         return "login";
     }
 
-    @RequestMapping(value = "/admin/mainPage", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/mainPage")
     public String mainPage() {
         return "mainPage";
     }
 
-    @RequestMapping(value = "/userPage", method = RequestMethod.GET)
+    @GetMapping(value = "/userPage")
     public String userPage() {
-        return "userPage";
+        return "user";
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @GetMapping(value = "/user")
     public @ResponseBody
     User getCurrentUser(@AuthenticationPrincipal User user) {
         return user;

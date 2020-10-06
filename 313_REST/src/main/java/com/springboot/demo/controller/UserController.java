@@ -26,13 +26,8 @@ public class UserController {
 
     @PutMapping(value = "/edit")
     public void saveUser(@RequestBody User user,
-                         @RequestParam(value = "roles" , required = false) long[] roles) {
-        Set<Role> userRoles = new HashSet<>();
-        for (long role: roles) {
-            userRoles.add(userService.getRole(Long.valueOf(role)));
-        }
-        user.setRoles(userRoles);
-        userService.editUser(user);
+                         @RequestParam(value = "roles", required = false) long[] roles) {
+        userService.editUser(user, roles);
     }
 
     @DeleteMapping(value = "/users/{idDelete}")
@@ -43,12 +38,7 @@ public class UserController {
     @PostMapping(value = "/users")
     public void addUser(@RequestBody User user,
                         @RequestParam(value = "roles" , required = false) long[] roles) {
-        Set<Role> userRoles = new HashSet<>();
-        for (long role: roles) {
-            userRoles.add(userService.getRole(Long.valueOf(role)));
-        }
-        user.setRoles(userRoles);
-        userService.addUser(user);
+        userService.addUser(user, roles);
     }
 
     @GetMapping(value = "/users/{id}")
